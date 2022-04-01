@@ -1,0 +1,19 @@
+/* Header */
+.header {
+  background-color: white;
+  border-bottom: 1px rgb(200, 200, 200) solid;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.header img {
+  width: 200px;
+  padding: 10px;
+  cursor: pointer;
+}
+.icons a i {
+  color: black;
+}
+.active i {
+  border-bottom: 2px black solid;
+}
