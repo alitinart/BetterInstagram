@@ -34,3 +34,29 @@
 .search input:focus {
   transform: scale(1);
 }
+
+/* Toolbar */
+.tool-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px rgb(200, 200, 200) solid;
+  justify-content: center;
+  padding: 10px;
+  display: none;
+}
+.tool-bar .icons i {
+  font-size: 30px;
+  margin: 0 20px;
+}
+
+/* Phone */
+@media screen and (max-width: 699px) {
+  .header form,
+  .header .icons {
+    display: none;
+  }
+  .tool-bar {
+    display: flex;
+  }
+}
