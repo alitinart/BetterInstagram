@@ -1,9 +1,13 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import State from "../../../models/state.model";
 import "../../pageComponents.css";
 
 export default function ToolBar() {
-  return (
+  const { token } = useSelector((state: State) => state);
+
+  return token ? (
     <div className="tool-bar">
       <div className="icons">
         <NavLink to={"/"}>
@@ -20,5 +24,7 @@ export default function ToolBar() {
         </NavLink>
       </div>
     </div>
+  ) : (
+    <></>
   );
 }

@@ -1,9 +1,6 @@
 import { createStore } from "redux";
 
-const appReducer = (
-  state = { token: null, rTokenId: null, userObject: null },
-  action
-) => {
+const appReducer = (state = { token: null, userObject: null }, action) => {
   switch (action.type) {
     case "login":
       return {
@@ -24,7 +21,7 @@ const appReducer = (
         token: null,
       };
     default:
-      return;
+      return { ...state };
   }
 };
 
