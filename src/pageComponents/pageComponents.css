@@ -17,3 +17,20 @@
 .active i {
   border-bottom: 2px black solid;
 }
+
+/* Search */
+.search {
+  border: 1px gray solid;
+  padding: 0 5px;
+  border-radius: 3px;
+}
+.search input {
+  border: none;
+  padding: 5px;
+}
+.search i {
+  color: gray;
+}
+.search input:focus {
+  transform: scale(1);
+}

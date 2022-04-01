@@ -3,12 +3,13 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../assets/images/BetterInstagram.png";
 
 import "../pageComponents.css";
+import Search from "../Search/Search";
 
 export default function Header() {
   return (
     <div className="container computer-view header">
       <img src={Logo} alt="BetterInstagram Logo" />
-      <input type={"text"} placeholder="Search" />
+      <Search />
       <div className="icons">
         <NavLink to={"/"}>
           <i className="bi bi-house icon"></i>
