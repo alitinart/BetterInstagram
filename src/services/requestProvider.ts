@@ -1,3 +1,11 @@
+/**
+ *
+ * TODO: Add Requests for adding Posts, following users and adding stories
+ *
+ * ? Add calling, livestreaming etc...
+ *
+ */
+
 import axios, { AxiosRequestHeaders } from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -48,5 +56,49 @@ async function request(
   }
 }
 
-export const userRequests = {};
+export const userRequests = {
+  /**
+   * Get Users
+   */
+  getAllUsers: async () => {
+    return await request("/api/v2/general/users", "GET", {}, {});
+  },
+  /**
+   * Register User
+   */
+  registerUser: async (
+    email: string,
+    name: string,
+    lastName: string,
+    username: string,
+    password: string
+  ) => {
+    return await request(
+      "/api/v2/general/users/auth/register",
+      "POST",
+      { email, name, lastName, username, password },
+      {}
+    );
+  },
+  /**
+   * Login User
+   */
+  loginUser: async (
+    email: string | undefined,
+    username: string | undefined,
+    password: string
+  ) => {
+    return await request(
+      "/api/v2/general/users/auth/login",
+      "POST",
+      {
+        email,
+        username,
+        password,
+      },
+      {}
+    );
+  },
+};
+
 export const postRequests = {};
