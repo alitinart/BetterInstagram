@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import authGuard from "../../guards/authGuard";
 import State from "../../models/state.model";
+import Register from "../auth/Register";
 
 export default function Main() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -13,5 +14,5 @@ export default function Main() {
     }
   }, []);
 
-  return loggedIn ? <div className="main"></div> : <div className="auth"></div>;
+  return loggedIn ? <div className="main"></div> : <Register />;
 }

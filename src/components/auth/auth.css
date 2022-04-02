@@ -1,0 +1,8 @@
+.register .form input {
+  margin: 5px 0;
+}
+.register form {
+  background-color: white;
+  padding: 30px;
+  border: 1px rgb(200, 200, 200) solid;
+}

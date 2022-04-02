@@ -14,6 +14,32 @@
   padding: 0 15%;
 }
 
+.btn {
+  padding: 10px;
+  font-size: 18px;
+  background: rgb(141, 0, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(141, 0, 255, 1) 0%,
+    rgba(255, 106, 0, 1) 49%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: rotateX(360deg);
+}
+
+.btn:disabled {
+  opacity: 90;
+}
+
 /* Input */
 
 input {
@@ -29,11 +55,109 @@ input:focus {
   outline: none;
 }
 
+/* Password Container */
+
+.password-container {
+  border: 1px gray solid;
+  margin: 5px 0;
+  border-radius: 3px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.password-container input {
+  border: none;
+}
+.password-container input:focus {
+  transform: scale(1);
+}
+.password-container i {
+  float: right;
+  margin: auto 10px;
+  border-radius: 100%;
+  padding: 2px 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid rgb(180, 180, 180);
+  color: rgb(180, 180, 180);
+}
+.password-container i:hover {
+  background-color: rgb(180, 180, 180);
+  color: white;
+}
+
 /* Icon */
 
 .icon {
   font-size: 25px;
   margin: 0 10px;
+}
+
+/* Flexbox */
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Margin */
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-5 {
+  margin-top: 5px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-5 {
+  margin-bottom: 5px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+/* Padding */
+.pt-10 {
+  padding-top: 10px;
+}
+.pt-5 {
+  padding-top: 5px;
+}
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pb-10 {
+  padding-bottom: 10px;
+}
+.pb-5 {
+  padding-bottom: 5px;
+}
+.pb-20 {
+  padding-bottom: 20px;
+}
+
+/* Height */
+.h-full {
+  height: calc(100vh - 150px);
 }
 
 /* Media Queries */
