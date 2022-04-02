@@ -83,16 +83,12 @@ export const userRequests = {
   /**
    * Login User
    */
-  loginUser: async (
-    email: string | undefined,
-    username: string | undefined,
-    password: string
-  ) => {
+  loginUser: async (username: string, password: string) => {
     return await request(
       "/api/v2/general/users/auth/login",
       "POST",
       {
-        email,
+        email: undefined,
         username,
         password,
       },

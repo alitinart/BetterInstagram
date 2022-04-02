@@ -6,3 +6,19 @@
   padding: 30px;
   border: 1px rgb(200, 200, 200) solid;
 }
+
+.switch-mode-text {
+  text-align: center;
+  margin: 10px 0;
+}
+.switch-mode-text span {
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(46, 46, 179);
+}
+
+@media screen and (max-width: 468px) {
+  .register img {
+    display: none;
+  }
+}

@@ -5,6 +5,7 @@ interface InputProps {
   state: string;
   placeholder: string;
   setState: any;
+  isRequired: boolean;
 }
 
 export default function Input({
@@ -12,16 +13,17 @@ export default function Input({
   placeholder,
   state,
   setState,
+  isRequired,
 }: InputProps) {
   return (
     <input
       type={type}
       value={state}
       onChange={(e) => {
-        console.log(e.target.value);
         setState(e.target.value);
       }}
       placeholder={placeholder}
+      required={isRequired}
     />
   );
 }
