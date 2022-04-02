@@ -68,9 +68,7 @@ router.post("/register", checkAPIKey, async (req, res) => {
 
 router.post("/login", checkAPIKey, async (req, res) => {
   const { username, password } = req.body;
-  let user;
-
-  user = await User.findOne({ username });
+  let user = await User.findOne({ username });
 
   if (!user) {
     return res.json({
@@ -92,7 +90,7 @@ router.post("/login", checkAPIKey, async (req, res) => {
 
   res.json({
     error: false,
-    data: { token: accessToken },
+    data: { token: accessToken, userObject: user },
     message: "Successfully logged in user",
   });
 });

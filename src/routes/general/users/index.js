@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const mongoose = require("mongoose");
+const authenticateToken = require("../../../middleware/authenticateToken");
 const checkAPIKey = require("../../../middleware/checkAPIKey");
 const User = mongoose.model("User");
 
@@ -19,6 +20,23 @@ router.use("/auth", require("./auth"));
 router.get("/", checkAPIKey, async (req, res) => {
   User.find({}).then((users) => {
     res.json({ error: false, data: [...users], message: "All users returned" });
+  });
+});
+
+/**
+ *
+ * Sync User
+ * Method: GET
+ *
+ */
+
+router.get("/", checkAPIKey, authenticateToken, (req, res) => {
+  User.findOne({ _id: req.user._id }).then((user) => {
+    res.json({
+      error: false,
+      data: { user },
+      message: "User Synced",
+    });
   });
 });
 
