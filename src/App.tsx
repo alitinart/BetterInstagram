@@ -9,8 +9,28 @@ import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import { useDispatch } from "react-redux";
+import { userRequests } from "./services/requestProvider";
+import Profile from "./components/Profile/Profile";
+import AddPost from "./components/AddPost/AddPost";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const getToken = async () => {
+      let token = localStorage.getItem("token");
+      const syncResponse = await userRequests.syncUser(token);
+      dispatch({
+        type: "sync",
+        token: syncResponse.data.token,
+        userObject: syncResponse.data.user,
+      });
+    };
+
+    getToken();
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Header />
@@ -19,6 +39,8 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/add-post" element={<AddPost />} />
       </Routes>
       <ToolBar />
     </BrowserRouter>

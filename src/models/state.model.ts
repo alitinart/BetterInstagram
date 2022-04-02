@@ -1,4 +1,6 @@
+import User from "./user.model";
+
 export default interface State {
   token: string;
-  userObject: any;
+  userObject: User;
 }

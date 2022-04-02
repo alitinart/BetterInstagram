@@ -58,7 +58,20 @@ async function request(
 
 export const userRequests = {
   /**
+   * Sync User
+   * @return User Object
+   */
+  syncUser: async (token: string | null) => {
+    return await request(
+      "/api/v2/general/users/sync",
+      "GET",
+      {},
+      { Authorization: `Bearer ${token}` }
+    );
+  },
+  /**
    * Get Users
+   * @returns All Users
    */
   getAllUsers: async () => {
     return await request("/api/v2/general/users", "GET", {}, {});
@@ -82,6 +95,7 @@ export const userRequests = {
   },
   /**
    * Login User
+   * @returns Token and User Object
    */
   loginUser: async (username: string, password: string) => {
     return await request(
@@ -97,4 +111,21 @@ export const userRequests = {
   },
 };
 
-export const postRequests = {};
+export const postRequests = {
+  /**
+   * Create Post
+   */
+  createPost: async (token: string, caption: string, location: string) => {
+    return await request(
+      "/api/v2/general/posts/",
+      "POST",
+      {
+        caption,
+        location,
+      },
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+  },
+};

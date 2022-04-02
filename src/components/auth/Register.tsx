@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import Mockup from "../../assets/images/pageImages/instagramMockup.png";
+import authGuard from "../../guards/authGuard";
 import Input from "../../pageComponents/Input/Input";
 import NotificationProvider from "../../services/notificationProvider";
 import { userRequests } from "../../services/requestProvider";
@@ -19,6 +20,12 @@ export default function Register() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [retypedPassword, setRetypedPassword] = React.useState("");
+
+  React.useEffect(() => {
+    if (authGuard(localStorage.getItem("token"))) {
+      nav("/");
+    }
+  }, [nav]);
 
   const submitHandler = async () => {
     if (retypedPassword !== password) {

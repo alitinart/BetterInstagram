@@ -8,6 +8,11 @@ const appReducer = (state = { token: null, userObject: null }, action) => {
         token: action.token,
         userObject: action.userObject,
       };
+    case "token":
+      return {
+        ...state,
+        token: action.token,
+      };
     case "sync":
       return {
         ...state,

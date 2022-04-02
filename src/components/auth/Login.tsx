@@ -2,6 +2,7 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Mockup from "../../assets/images/pageImages/instagramMockup.png";
+import authGuard from "../../guards/authGuard";
 import Input from "../../pageComponents/Input/Input";
 import NotificationProvider from "../../services/notificationProvider";
 import { userRequests } from "../../services/requestProvider";
@@ -16,6 +17,12 @@ export default function Login() {
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  React.useEffect(() => {
+    if (authGuard(localStorage.getItem("token"))) {
+      nav("/");
+    }
+  }, [nav]);
 
   const submitHandler = async () => {
     const loginResponse = await userRequests.loginUser(username, password);

@@ -1,4 +1,4 @@
-export default function authGuard(token: string) {
+export default function authGuard(token: string | null) {
   if (!token) {
     return false;
   }

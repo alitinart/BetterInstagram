@@ -1,0 +1,72 @@
+.profile {
+  align-items: center;
+  padding-top: 50px;
+}
+.pfp {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pfp img {
+  width: 50%;
+  border-radius: 100%;
+}
+.info {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.username {
+  font-size: 40px;
+}
+.full-name {
+  font-size: 20px;
+}
+.counters {
+  display: flex;
+  margin-top: 20px;
+}
+.counters p {
+  margin: 0 20px 0 0;
+  font-size: 20px;
+}
+.title-posts {
+  margin-top: 50px;
+  font-size: 35px;
+}
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 20px;
+}
+.post {
+  background-color: white;
+  border: 1px rgb(214, 214, 214) solid;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 250px;
+  margin: 0 15px 0 0;
+}
+.tint {
+  background-color: rgba(0, 0, 0, 0.326);
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.post:hover .tint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tint i {
+  color: white;
+  font-size: 30px;
+}
+@media screen and (max-width: 1313px) {
+  .pfp img {
+    width: 70%;
+  }
+}
