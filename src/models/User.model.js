@@ -27,6 +27,12 @@ const User = new mongoose.Schema({
   stories: {
     type: Array,
   },
+  followers: {
+    type: Array,
+  },
+  following: {
+    type: Array,
+  },
 });
 
 mongoose.model("User", User);
