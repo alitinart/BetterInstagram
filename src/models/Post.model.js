@@ -12,6 +12,14 @@ const Post = new mongoose.Schema({
   location: {
     type: String,
   },
+  // likes: {
+  //   type: Number,
+  //   required: "This field is required",
+  // },
+  // comments: {
+  //   type: Number,
+  //   required: "This field is required",
+  // },
   timestamp: {
     type: Date,
     default: Date.now,

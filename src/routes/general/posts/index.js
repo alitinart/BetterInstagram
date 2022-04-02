@@ -21,13 +21,12 @@ require("dotenv").config();
  */
 
 router.post("/", checkAPIKey, authenticateToken, (req, res) => {
-  console.log(req.files);
   cloudinary.uploader.upload(
     req.files.file.tempFilePath,
     {
       public_id: req.files.file.name,
     },
-    (error, result) => {
+    async (error, result) => {
       if (error)
         res.json({ error: true, data: { ...error }, message: error.message });
       fs.unlinkSync(req.files.file.tempFilePath);
@@ -40,7 +39,9 @@ router.post("/", checkAPIKey, authenticateToken, (req, res) => {
       });
 
       newPost.save();
-      let posts = req.user.posts;
+
+      const user = await User.findOne({ _id: req.user._id });
+      let posts = user.posts;
       posts.push({
         _id: newPost._id,
         imageUrl: result.url,
