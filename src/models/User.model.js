@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const User = new mongoose.Schema({
+  profileImage: {
+    type: String,
+    default:
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+  },
   name: {
     type: String,
     required: "This field is required",
@@ -32,6 +37,9 @@ const User = new mongoose.Schema({
   },
   following: {
     type: Array,
+  },
+  bio: {
+    type: String,
   },
 });
 
