@@ -45,6 +45,7 @@ router.post("/register", checkAPIKey, async (req, res) => {
   const newUser = new User({
     email,
     name,
+    username,
     lastName,
     password: hashedPassword,
   });
@@ -66,25 +67,17 @@ router.post("/register", checkAPIKey, async (req, res) => {
  */
 
 router.post("/login", checkAPIKey, async (req, res) => {
-  const { email, username, password } = req.body;
+  const { username, password } = req.body;
   let user;
 
-  if (email) {
-    user = await User.find({ email });
-    if (!user)
-      res.json({
-        error: true,
-        message: "No user found with that email",
-        data: {},
-      });
-  } else if (username) {
-    user = await User.find({ username });
-    if (!user)
-      res.json({
-        error: true,
-        message: "No user found with that username",
-        data: {},
-      });
+  user = await User.findOne({ username });
+
+  if (!user) {
+    return res.json({
+      error: true,
+      message: "No user found with that username",
+      data: {},
+    });
   }
 
   if (!(await bcrypt.compare(password, user.password))) {
@@ -95,7 +88,7 @@ router.post("/login", checkAPIKey, async (req, res) => {
     });
   }
 
-  const accessToken = tokenProvider.generateToken(user);
+  const accessToken = tokenProvider(user);
 
   res.json({
     error: false,

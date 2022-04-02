@@ -17,8 +17,9 @@ router.use("/auth", require("./auth"));
  */
 
 router.get("/", checkAPIKey, async (req, res) => {
-  const users = User.find({});
-  res.json({ error: false, data: [...users], message: "All users returned" });
+  User.find({}).then((users) => {
+    res.json({ error: false, data: [...users], message: "All users returned" });
+  });
 });
 
 module.exports = router;
