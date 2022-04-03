@@ -42,7 +42,7 @@ router.post("/", checkAPIKey, authenticateToken, (req, res) => {
 
       const user = await User.findOne({ _id: req.user._id });
       let posts = user.posts;
-      posts.push({
+      posts.unshift({
         _id: newPost._id,
         imageUrl: result.url,
         caption: newPost.caption,

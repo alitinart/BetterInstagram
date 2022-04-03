@@ -7,6 +7,7 @@ const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(
