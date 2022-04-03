@@ -13,6 +13,11 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   const profileChangeHandler = async (event: any) => {
+    NotificationProvider(
+      "Changing Profile Picture",
+      "Your profile picture is changing",
+      "info"
+    );
     let data = new FormData();
 
     data.append("file", event.target.files[0]);
