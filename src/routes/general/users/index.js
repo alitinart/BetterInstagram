@@ -7,6 +7,9 @@ const checkAPIKey = require("../../../middleware/checkAPIKey");
 const tokenProvider = require("../../../services/tokenProvider");
 const User = mongoose.model("User");
 
+const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
+
 require("dotenv").config();
 
 router.use("/auth", require("./auth"));
@@ -40,6 +43,85 @@ router.get("/sync", checkAPIKey, authenticateToken, (req, res) => {
       message: "User Synced",
     });
   });
+});
+
+/**
+ *
+ * Search Users
+ * Method: GET
+ *
+ */
+
+router.get("/search/:query", checkAPIKey, (req, res) => {
+  User.find({
+    username: req.params.query,
+  })
+    .then((users) => {
+      let results = [];
+      users.forEach((user) => {
+        results.push({
+          email: user.email,
+          username: user.username,
+          profileImage: user.profileImage,
+          name: user.name,
+          lastName: user.lastName,
+        });
+      });
+      res.json({
+        error: false,
+        message: "Users Returned",
+        data: { results },
+      });
+    })
+    .catch((err) => {
+      res.json({
+        error: true,
+        message: err.message,
+        data: { ...err },
+      });
+    });
+});
+
+// UPDATE USER INFO REQUESTS
+// TODO: Add update user profile picture request, change info (email, username, first name etc...) requests
+
+/**
+ *
+ * Change Profile Picture
+ * Method: POST
+ *
+ */
+
+router.post("/change/pfp", checkAPIKey, authenticateToken, (req, res) => {
+  cloudinary.uploader.upload(
+    req.files.file.tempFilePath,
+    {
+      public_id: req.files.file.name,
+    },
+    async (error, result) => {
+      if (error)
+        res.json({ error: true, data: { ...error }, message: error.message });
+      fs.unlinkSync(req.files.file.tempFilePath);
+      User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $set: { profileImage: result.url } }
+      )
+        .then(() => {
+          res.json({
+            error: false,
+            message: "Changed Profile Image Successfully",
+            data: {},
+          });
+        })
+        .catch((err) => {
+          res.json({
+            error: true,
+            message: err.message,
+            data: { ...err },
+          });
+        });
+    }
+  );
 });
 
 module.exports = router;
