@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import State from "../../models/state.model";
 import Input from "../../pageComponents/Input/Input";
 import NotificationProvider from "../../services/notificationProvider";
@@ -15,11 +16,13 @@ export default function AddPost() {
   const [caption, setCaption] = React.useState("");
   const [location, setLocation] = React.useState("");
 
+  const [loading, setLoading] = React.useState(false);
+
   const { token } = useSelector((state: State) => state);
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const fileUpload = (event: any) => {
-    console.log(event.target.files[0]);
     setFile(event.target.files[0]);
     setFilePath(URL.createObjectURL(event.target.files[0]));
   };
@@ -45,7 +48,9 @@ export default function AddPost() {
       token: syncResponse.data.token,
     });
 
+    setLoading(false);
     NotificationProvider("Success", postResponse.message, "success");
+    nav("/profile");
   };
 
   return (
@@ -55,7 +60,8 @@ export default function AddPost() {
         className="flex-column form"
         onSubmit={(e) => {
           e.preventDefault();
-          submitHandler();
+          !loading ? submitHandler() : console.log("Posting...🕐");
+          setLoading(true);
         }}
       >
         <label className="file-upload-label" htmlFor="file-upload">
@@ -84,7 +90,9 @@ export default function AddPost() {
           state={location}
           setState={setLocation}
         />
-        <button className="btn">Create Post</button>
+        <button className="btn">
+          {loading ? <div className="loader"></div> : "Create Post"}
+        </button>
       </form>
     </div>
   );

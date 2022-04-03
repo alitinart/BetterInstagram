@@ -64,6 +64,33 @@ async function request(
 
 export const userRequests = {
   /**
+   * Change Profile Image
+   * @param token
+   * @param data
+   * @returns
+   */
+  changeProfileImage: async (token: string, data: FormData) => {
+    return await request(
+      "/api/v2/general/users/change/pfp",
+      "FORM-DATA",
+      data,
+      { Authorization: `Bearer ${token}` }
+    );
+  },
+  /**
+   * Search Users
+   * @returns Users
+   * @param query
+   */
+  searchUser: async (query: string | undefined) => {
+    return await request(
+      `/api/v2/general/users/search/${query}`,
+      "GET",
+      {},
+      {}
+    );
+  },
+  /**
    * Sync User
    * @return User Object
    */

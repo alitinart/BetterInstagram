@@ -55,6 +55,38 @@ input:focus {
   outline: none;
 }
 
+/* Loading */
+
+.loader {
+  border: 8px solid rgb(254, 254, 254);
+  border-radius: 50%;
+  border-top: 8px solid rgb(255, 234, 0);
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Password Container */
 
 .password-container {

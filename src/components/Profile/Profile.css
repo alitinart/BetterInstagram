@@ -8,9 +8,37 @@
   align-items: center;
   justify-content: center;
 }
-.pfp img {
-  width: 50%;
-  border-radius: 100%;
+.profile-image {
+  width: 250px;
+  height: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.profile-tint {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.401);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.profile-tint i {
+  cursor: pointer;
+  color: black;
+  font-size: 25px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 6px 12px;
+}
+#profile-image-upload {
+  display: none;
+}
+.profile-image:hover .profile-tint {
+  display: flex;
+  cursor: pointer;
 }
 .info {
   width: 70%;
@@ -34,7 +62,7 @@
 }
 .title-posts {
   margin-top: 50px;
-  font-size: 35px;
+  font-size: 50px;
 }
 .posts {
   /* display: grid;
@@ -84,5 +112,21 @@
 @media screen and (max-width: 778px) {
   .post {
     width: 100%;
+  }
+  .pfp {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .pfp div {
+    height: 150px;
+    margin: auto 0;
+  }
+  .info {
+    width: 100%;
+    text-align: center;
+  }
+  .counters p {
+    margin: 0 auto;
   }
 }

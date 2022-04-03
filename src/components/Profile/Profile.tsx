@@ -1,17 +1,66 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import State from "../../models/state.model";
+import NotificationProvider from "../../services/notificationProvider";
+import { userRequests } from "../../services/requestProvider";
 
 import "./Profile.css";
 
 export default function Profile() {
   const { userObject } = useSelector((state: State) => state);
 
+  const { token } = useSelector((state: State) => state);
+  const dispatch = useDispatch();
+
+  const profileChangeHandler = async (event: any) => {
+    let data = new FormData();
+
+    data.append("file", event.target.files[0]);
+
+    const profileChangeResponse = await userRequests.changeProfileImage(
+      token,
+      data
+    );
+
+    if (profileChangeResponse.error) {
+      return NotificationProvider(
+        "Error",
+        profileChangeResponse.message,
+        "danger"
+      );
+    }
+
+    const syncUserResponse = await userRequests.syncUser(token);
+    dispatch({
+      type: "sync",
+      token: syncUserResponse.data.token,
+      userObject: syncUserResponse.data.user,
+    });
+    NotificationProvider(
+      "Success",
+      "Successfully updated Profile Picture",
+      "success"
+    );
+  };
+
   return userObject ? (
     <div className="container pt-20 profile">
       <div className="flex-row profile-info">
         <div className="pfp">
-          <img src={userObject.profileImage} alt="Profile" />
+          <div
+            className="profile-image"
+            style={{ backgroundImage: `url("${userObject.profileImage}")` }}
+          >
+            <label className="profile-tint" htmlFor="profile-image-upload">
+              <i className="bi bi-pencil"></i>
+            </label>
+            <input
+              type={"file"}
+              accept={"image/*"}
+              id="profile-image-upload"
+              onChange={profileChangeHandler}
+            />
+          </div>
         </div>
         <div className="info">
           <h1 className="username">{userObject.username}</h1>

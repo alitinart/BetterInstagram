@@ -14,6 +14,7 @@ import { userRequests } from "./services/requestProvider";
 import Profile from "./components/Profile/Profile";
 import AddPost from "./components/AddPost/AddPost";
 import NotificationProvider from "./services/notificationProvider";
+import Results from "./components/Results/Results";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/add-post" element={<AddPost />} />
+        <Route path="/search/:query" element={<Results />} />
       </Routes>
       <ToolBar />
     </BrowserRouter>

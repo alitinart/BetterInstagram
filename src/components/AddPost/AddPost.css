@@ -11,6 +11,8 @@
 }
 .form img {
   border: 1px gray solid;
+  padding: 10px;
+  border-radius: 3px;
 }
 #file-upload {
   display: none;
@@ -28,4 +30,10 @@
 .title {
   font-size: 45px;
   text-align: center;
+}
+
+@media screen and (max-width: 778px) {
+  .form img {
+    width: 200px;
+  }
 }

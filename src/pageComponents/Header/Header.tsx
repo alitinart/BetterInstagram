@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/BetterInstagram.png";
 import State from "../../models/state.model";
 
@@ -9,10 +9,17 @@ import Search from "../Search/Search";
 
 export default function Header() {
   const { token } = useSelector((state: State) => state);
+  const nav = useNavigate();
 
   return (
     <div className="container computer-view header">
-      <img src={Logo} alt="BetterInstagram Logo" />
+      <img
+        src={Logo}
+        onClick={() => {
+          nav("/");
+        }}
+        alt="BetterInstagram Logo"
+      />
       {token ? <Search /> : <></>}
       {token ? (
         <div className="icons">
