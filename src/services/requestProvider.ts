@@ -53,6 +53,12 @@ async function request(
       });
 
       return deleteResponse.data;
+    case "FORM-DATA":
+      const formResponse = await axios.post(`${API_URL}${pathname}`, body, {
+        headers: { ...defaultHeader, ...headers },
+      });
+
+      return formResponse.data;
   }
 }
 
@@ -115,17 +121,10 @@ export const postRequests = {
   /**
    * Create Post
    */
-  createPost: async (token: string, caption: string, location: string) => {
-    return await request(
-      "/api/v2/general/posts/",
-      "POST",
-      {
-        caption,
-        location,
-      },
-      {
-        Authorization: `Bearer ${token}`,
-      }
-    );
+  createPost: async (token: string, data: FormData) => {
+    return await request("/api/v2/general/posts/", "FORM-DATA", data, {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    });
   },
 };

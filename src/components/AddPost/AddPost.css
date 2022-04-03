@@ -1,0 +1,31 @@
+.add-post {
+  background-color: white;
+  padding: 30px;
+  border: rgb(213, 213, 213) 1px solid;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+.form input {
+  margin: 10px 0;
+}
+.form img {
+  border: 1px gray solid;
+}
+#file-upload {
+  display: none;
+}
+.file-upload-label img {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+.file-upload-label p {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+.title {
+  font-size: 45px;
+  text-align: center;
+}

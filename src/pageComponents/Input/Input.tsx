@@ -2,10 +2,14 @@ import * as React from "react";
 
 interface InputProps {
   type: string;
-  state: string;
+  state: any;
   placeholder: string;
   setState: any;
   isRequired: boolean;
+  className?: string;
+  accept?: string;
+  id?: string;
+  name?: string;
 }
 
 export default function Input({
@@ -14,6 +18,10 @@ export default function Input({
   state,
   setState,
   isRequired,
+  accept,
+  id,
+  className,
+  name,
 }: InputProps) {
   return (
     <input
@@ -22,8 +30,12 @@ export default function Input({
       onChange={(e) => {
         setState(e.target.value);
       }}
+      name={name}
+      id={id}
+      className={className}
       placeholder={placeholder}
       required={isRequired}
+      accept={accept}
     />
   );
 }

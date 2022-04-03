@@ -38,6 +38,7 @@
 /* Toolbar */
 .tool-bar {
   position: fixed;
+  background-color: white;
   bottom: 0;
   width: 100%;
   border-top: 1px rgb(200, 200, 200) solid;

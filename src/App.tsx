@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { userRequests } from "./services/requestProvider";
 import Profile from "./components/Profile/Profile";
 import AddPost from "./components/AddPost/AddPost";
+import NotificationProvider from "./services/notificationProvider";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,14 @@ function App() {
     const getToken = async () => {
       let token = localStorage.getItem("token");
       const syncResponse = await userRequests.syncUser(token);
+      if (syncResponse.error) {
+        localStorage.removeItem("token");
+        return NotificationProvider(
+          "Session Expired",
+          "Your session has expired",
+          "danger"
+        );
+      }
       dispatch({
         type: "sync",
         token: syncResponse.data.token,

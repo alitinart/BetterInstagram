@@ -37,18 +37,21 @@
   font-size: 35px;
 }
 .posts {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; */
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 20px;
 }
 .post {
-  background-color: white;
   border: 1px rgb(214, 214, 214) solid;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 250px;
-  margin: 0 15px 0 0;
+  width: 30%;
+  height: 500px;
+  margin: 10px 15px 10px 0;
+  cursor: pointer;
 }
 .tint {
   background-color: rgba(0, 0, 0, 0.326);
@@ -65,8 +68,21 @@
   color: white;
   font-size: 30px;
 }
+
 @media screen and (max-width: 1313px) {
   .pfp img {
     width: 70%;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .post {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 778px) {
+  .post {
+    width: 100%;
   }
 }
