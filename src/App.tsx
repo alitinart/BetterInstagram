@@ -15,6 +15,7 @@ import Profile from "./components/Profile/Profile";
 import AddPost from "./components/AddPost/AddPost";
 import NotificationProvider from "./services/notificationProvider";
 import Results from "./components/Results/Results";
+import Post from "./pageComponents/Post/Post";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
   React.useEffect(() => {
     const getToken = async () => {
       let token = localStorage.getItem("token");
+      if (!token) {
+        return;
+      }
       const syncResponse = await userRequests.syncUser(token);
       if (syncResponse.error) {
         localStorage.removeItem("token");
@@ -43,6 +47,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Post />
       <Header />
       <ReactNotifications />
       <Routes>

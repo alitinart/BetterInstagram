@@ -64,6 +64,14 @@ async function request(
 
 export const userRequests = {
   /**
+   * Get User By Id
+   * @param id
+   * @returns User Object
+   */
+  getUserById: async (id: string) => {
+    return await request(`/api/v2/general/users/${id}`, "GET", {}, {});
+  },
+  /**
    * Change Profile Image
    * @param token
    * @param data
@@ -147,11 +155,22 @@ export const userRequests = {
 export const postRequests = {
   /**
    * Create Post
+   * @param token
+   * @param data
+   * @returns Message
    */
   createPost: async (token: string, data: FormData) => {
     return await request("/api/v2/general/posts/", "FORM-DATA", data, {
       Authorization: `Bearer ${token}`,
       "Content-Type": "multipart/form-data",
     });
+  },
+  /**
+   * Get Post By ID
+   * @param id
+   * @returns Post
+   */
+  getPostById: async (id: string) => {
+    return await request(`/api/v2/general/posts/${id}`, "GET", {}, {});
   },
 };

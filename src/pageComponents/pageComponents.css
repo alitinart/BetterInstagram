@@ -51,6 +51,28 @@
   margin: 0 20px;
 }
 
+/* Post */
+
+.post-tint {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.327);
+}
+.close-icon {
+  position: absolute;
+  color: black;
+  padding: 0 8px;
+  border-radius: 100%;
+  right: 10px;
+  top: 10px;
+  font-size: 50px;
+  background-color: white;
+}
+
 /* Phone */
 @media screen and (max-width: 699px) {
   .header form,

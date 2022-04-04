@@ -1,6 +1,9 @@
 import { createStore } from "redux";
 
-const appReducer = (state = { token: null, userObject: null }, action) => {
+const appReducer = (
+  state = { token: null, userObject: null, post: null },
+  action
+) => {
   switch (action.type) {
     case "login":
       return {
@@ -24,6 +27,16 @@ const appReducer = (state = { token: null, userObject: null }, action) => {
         ...state,
         userObject: null,
         token: null,
+      };
+    case "show-post":
+      return {
+        ...state,
+        postId: action.postId,
+      };
+    case "close-post":
+      return {
+        ...state,
+        postId: "",
       };
     default:
       return { ...state };

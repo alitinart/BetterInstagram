@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Comment from "../../models/comment.model";
 import State from "../../models/state.model";
 import Input from "../../pageComponents/Input/Input";
 import NotificationProvider from "../../services/notificationProvider";
@@ -18,7 +19,7 @@ export default function AddPost() {
 
   const [loading, setLoading] = React.useState(false);
 
-  const { token } = useSelector((state: State) => state);
+  const { token, userObject } = useSelector((state: State) => state);
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -53,47 +54,100 @@ export default function AddPost() {
     nav("/profile");
   };
 
+  const dummyComments: Comment[] = [
+    {
+      _id: "12321312",
+      username: "Don Haci",
+      comment: "Nice photo there man !",
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQnVF6kPOwLxFmwHuLQIn-_f6lLFACKWYdCw&usqp=CAU",
+    },
+    {
+      _id: "12321312",
+      username: "Jason Bourne",
+      comment: "Right on !",
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsQ-YHX2i3RvTDDmpfnde4qyb2P8up7Wi3Ww&usqp=CAU",
+    },
+    {
+      _id: "12321312",
+      username: "Unkwn",
+      comment: "Keep it up champ !",
+      profileImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUEgE45wBPSyEEe2Aigcp4bkCPuOs7rcLi3A&usqp=CAU",
+    },
+  ];
+
   return (
-    <div className="container pt-20 add-post">
-      <h1 className="mb-20 title">Create Post</h1>
-      <form
-        className="flex-column form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          !loading ? submitHandler() : console.log("Posting...🕐");
-          setLoading(true);
-        }}
-      >
-        <label className="file-upload-label" htmlFor="file-upload">
+    <div className="container add-post-container">
+      <div className="post-preview">
+        <img src={filePath} alt="Post" className="post-image" />
+        <div className="post-info">
+          <div className="user-info">
+            <img src={userObject.profileImage} alt="User Profile" />
+            <div>
+              <h3>{userObject.username}</h3>
+              <p>{location}</p>
+            </div>
+          </div>
+          <p className="caption">{caption}</p>
+          <div className="comments">
+            {dummyComments.map((comment) => {
+              return (
+                <div className="comment" key={comment._id}>
+                  <img
+                    src={comment.profileImage}
+                    alt={comment.username + "'s Profile"}
+                  />
+                  <div className="comment-info">
+                    <h3>{comment.username}</h3>
+                    <p>{comment.comment}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="pt-20 add-post">
+        <h1 className="mb-20 title">Create Post</h1>
+        <form
+          className="flex-column form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            !loading ? submitHandler() : console.log("Posting...🕐");
+            setLoading(true);
+          }}
+        >
+          {/* <label className="file-upload-label" htmlFor="file-upload">
           <img src={filePath} alt="Upload Icon" />
-          <p className="mt-10 mb-10">Upload Image</p>
-        </label>
-        <input
-          placeholder="Upload File"
-          type="file"
-          onChange={fileUpload}
-          accept="image/*"
-          id="file-upload"
-          required
-        />
-        <Input
-          placeholder="Caption"
-          type="text"
-          isRequired={true}
-          state={caption}
-          setState={setCaption}
-        />
-        <Input
-          placeholder="Location"
-          type="text"
-          isRequired={true}
-          state={location}
-          setState={setLocation}
-        />
-        <button className="btn">
-          {loading ? <div className="loader"></div> : "Create Post"}
-        </button>
-      </form>
+        </label> */}
+          <input
+            placeholder="Upload File"
+            type="file"
+            onChange={fileUpload}
+            accept="image/*"
+            required
+          />
+          <Input
+            placeholder="Caption"
+            type="text"
+            isRequired={true}
+            state={caption}
+            setState={setCaption}
+          />
+          <Input
+            placeholder="Location"
+            type="text"
+            isRequired={true}
+            state={location}
+            setState={setLocation}
+          />
+          <button className="btn">
+            {loading ? <div className="loader"></div> : "Create Post"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

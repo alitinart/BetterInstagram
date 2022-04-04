@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import authGuard from "../../guards/authGuard";
 import Register from "../auth/Register";
-import { useSelector } from "react-redux";
-import State from "../../models/state.model";
 
 export default function Main() {
   const [loggedIn, setLoggedIn] = useState(false);

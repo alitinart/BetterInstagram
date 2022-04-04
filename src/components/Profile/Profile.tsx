@@ -96,6 +96,12 @@ export default function Profile() {
                 backgroundImage: `url("${post.imageUrl}")`,
               }}
               key={post._id}
+              onClick={() => {
+                dispatch({
+                  type: "show-post",
+                  postId: post._id,
+                });
+              }}
             >
               <div className="tint">
                 <i className="bi bi-heart"></i>
