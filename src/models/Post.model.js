@@ -12,6 +12,13 @@ const Post = new mongoose.Schema({
   location: {
     type: String,
   },
+  userId: {
+    type: String,
+  },
+  comments: {
+    type: Array,
+    required: "This field is Required",
+  },
   // likes: {
   //   type: Number,
   //   required: "This field is required",

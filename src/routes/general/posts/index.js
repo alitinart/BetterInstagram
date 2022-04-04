@@ -36,6 +36,7 @@ router.post("/", checkAPIKey, authenticateToken, (req, res) => {
         caption: req.body.caption,
         location: req.body.location,
         files,
+        userId: req.user._id,
       });
 
       newPost.save();
@@ -67,6 +68,27 @@ router.post("/", checkAPIKey, authenticateToken, (req, res) => {
         });
     }
   );
+});
+
+/**
+ *
+ * Get Post by ID
+ * Method: GET
+ *
+ */
+
+router.get("/:id", checkAPIKey, (req, res) => {
+  Post.findOne({ _id: req.params.id }).then((post) => {
+    if (!post) {
+      return res.json({
+        error: true,
+        message: "No Post found with that ID",
+        data: {},
+      });
+    }
+
+    res.json({ error: false, message: "Post found", data: { post } });
+  });
 });
 
 module.exports = router;

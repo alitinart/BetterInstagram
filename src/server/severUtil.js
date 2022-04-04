@@ -14,6 +14,7 @@ app.use(
   fileUpload({
     useTempFiles: true,
     tempFileDir: "/tmp/",
+    maxFieldsSize: "2 * 1024 * 1024 * 1024 ",
   })
 );
 

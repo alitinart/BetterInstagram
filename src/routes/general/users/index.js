@@ -82,6 +82,27 @@ router.get("/search/:query", checkAPIKey, (req, res) => {
     });
 });
 
+/**
+ *
+ * Get User by id
+ * Method: GET
+ *
+ */
+
+router.get("/:id", checkAPIKey, (req, res) => {
+  User.findOne({ _id: req.params.id }).then((user) => {
+    if (!user) {
+      return res.json({
+        error: true,
+        message: "No user found with that ID",
+        data: {},
+      });
+    }
+
+    res.json({ error: false, message: "User Found", data: { user } });
+  });
+});
+
 // UPDATE USER INFO REQUESTS
 // TODO: Add update user profile picture request, change info (email, username, first name etc...) requests
 
